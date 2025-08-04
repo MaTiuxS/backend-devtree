@@ -16,18 +16,6 @@ Este es el backend del proyecto **DevTree**, desarrollado con **Node.js**, **Typ
 ---
 
 ## 📁 Estructura del proyecto
-│
-├── src/
-│ ├── config/ # Conexión a base de datos y variables de entorno
-│ ├── models/ # Esquemas de Mongoose
-│ ├── routes/ # Rutas Express
-│ └── server.ts # Servidor principal
-│
-├── .env # Variables de entorno (NO subir al repo)
-├── .gitignore
-├── package.json
-├── tsconfig.json
-└── README.md
 
 
 ---
