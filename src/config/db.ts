@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { MONGO_URI } from './env';
 import colors from 'colors';
 
-export const connectDB = async() => {
+export const connectDB = async():Promise<void> => {
     try {
         
         const { connection } = await mongoose.connect( MONGO_URI );
