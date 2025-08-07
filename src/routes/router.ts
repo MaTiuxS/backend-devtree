@@ -1,18 +1,38 @@
 import { Router } from "express";
-import User from "../models/User";
+import { body } from 'express-validator';
+import { createAccount, login } from "../handlers";
+import { handleInputErrors } from "../middleware/validation";
 
 const router = Router();
 
 // Routing
 //? authentication and registration
-router.post('/auth/register', async(req, res) => {
-    // await User.create(req.body);
-    const user = new User(req.body);
+router.post('/auth/register', 
+    body('handle')
+        .notEmpty()
+        .withMessage('El handle no puede ir vacio'),
+    body('name')
+        .notEmpty()
+        .withMessage('El nombre no puede ir vacio'),
+    body('email')
+        .isEmail()
+        .withMessage('El email no es valido'),
+    body('password')
+        .isLength({ min: 8 })
+        .withMessage('El password es muy corto, minimo debe tener 8 caracteres'),
+    handleInputErrors,
+    createAccount
+);
 
-    await user.save();
-
-    res.status(200).send('Registro Creado correctamente');
-});
-
+router.post('/auth/login',
+    body('email')
+        .isEmail()
+        .withMessage('El email no es valido'),
+    body('password')
+        .notEmpty()
+        .withMessage('El password es obligatorio'),
+    handleInputErrors,
+    login,
+);
 
 export default router;
