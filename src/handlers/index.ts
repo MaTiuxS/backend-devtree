@@ -3,6 +3,7 @@ import User from "../models/User";
 import slug from 'slug';
 import { hashPassword, checkPassword } from "../utils/auth";
 import { validationResult } from 'express-validator';
+import { generateJWT } from '../utils/jwt';
 
 
 const createAccount = async(req: Request, res: Response) => {
@@ -50,8 +51,10 @@ const login =  async( req:Request, res:Response ) => {
     if ( !isPasswordCorrect ) {
         const error = new Error('El password es incorrecto');
         return res.status(401).json({ error: error.message });
-    }
-    res.status(200).send('Autenticado...')
+    };
+
+    const token = generateJWT({ id: user._id });
+    res.status(200).send( token );
     
 }
 

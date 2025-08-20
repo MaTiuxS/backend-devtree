@@ -7,4 +7,11 @@ const getEnv = (key:string):string => {
     return value;
 }
 
-export const MONGO_URI = getEnv('MONGO_URI');   
+const MONGO_URI = getEnv('MONGO_URI');   
+
+const JWT_SECRET = getEnv('JWT_SECRET');
+
+export {    
+    MONGO_URI,
+    JWT_SECRET,
+}
